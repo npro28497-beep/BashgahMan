@@ -25,7 +25,7 @@ class GymView extends View {
             CYAN=Color.rgb(45,196,255), PURPLE=Color.rgb(151,105,255), WHITE=Color.rgb(246,249,251),
             MUTED=Color.rgb(145,164,176), GREEN=Color.rgb(67,210,143), RED=Color.rgb(255,92,92);
     Paint p=new Paint(Paint.ANTI_ALIAS_FLAG);
-    MainActivity activity; float density=1f; float W,H; int page=0, detail=-1; float scroll=0, downY, lastY; boolean moved;
+    MainActivity activity; float density=1f; float uiScale=1f; float W,H; int page=0, detail=-1; float scroll=0, downY, lastY; boolean moved;
     String[] nav={"خانه","تمرین","بدن","مکمل","برنامه","پیشرفت","درباره"};
     String[] navGlyph={"⌂","✦","◎","＋","▦","↗","i"};
     String[] exName={"پرس سینه هالتر","پرس بالا سینه دمبل","زیربغل قایقی","لت از جلو","پرس سرشانه دمبل","نشر جانب دمبل","جلو بازو دمبل","پشت بازو سیمکش","اسکوات هالتر","پرس پا دستگاه","ددلیفت رومانیایی","کرانچ شکم"};
@@ -38,7 +38,7 @@ class GymView extends View {
     Typeface bold=Typeface.create("sans-serif",Typeface.BOLD), regular=Typeface.create("sans-serif",Typeface.NORMAL);
 
     GymView(MainActivity c){super(c); activity=c; density=getResources().getDisplayMetrics().density; prefs=c.getSharedPreferences("gym",0); setLayerType(View.LAYER_TYPE_SOFTWARE,null); setFocusable(true);}
-    float w(){return getWidth()/density;} float h(){return getHeight()/density;}
+    float w(){return getWidth()/density/uiScale;} float h(){return getHeight()/density/uiScale;}
     void fill(Canvas c,int color){c.drawColor(color);}
     void rr(Canvas c,float l,float t,float r,float b,float rad,int color){p.setStyle(Paint.Style.FILL);p.setColor(color);p.clearShadowLayer();c.drawRoundRect(l,t,r,b,rad,rad,p);}
     void shadowCard(Canvas c,float l,float t,float r,float b,float rad){p.setStyle(Paint.Style.FILL);p.setColor(CARD);p.setShadowLayer(20,0,8,0x55000000);c.drawRoundRect(l,t,r,b,rad,rad,p);p.clearShadowLayer();}
@@ -47,7 +47,7 @@ class GymView extends View {
     void rtlB(Canvas c,String s,float x,float y,float size,int color){txt(c,s,x,y,size,color,Paint.Align.RIGHT,true);}
     void line(Canvas c,float x1,float y1,float x2,float y2,int color,float sw){p.setColor(color);p.setStrokeWidth(sw);p.setStyle(Paint.Style.STROKE);p.setStrokeCap(Paint.Cap.ROUND);c.drawLine(x1,y1,x2,y2,p);p.setStyle(Paint.Style.FILL);}
     @Override protected void onDraw(Canvas c){
-        W=w(); H=h(); c.save(); c.scale(density,density);
+        float rawW=getWidth()/density; uiScale=Math.max(0.85f,Math.min(1.15f,rawW/360f)); W=w(); H=h(); c.save(); c.scale(density*uiScale,density*uiScale);
         fill(c,BG); c.save(); c.clipRect(0,0,W,H-92);
         c.translate(0,-scroll);
         if(detail>=0) exerciseDetail(c); else switch(page){case 0:home(c);break;case 1:workouts(c);break;case 2:bodies(c);break;case 3:supplements(c);break;case 4:plans(c);break;case 5:progress(c);break;default:about(c);}
@@ -169,7 +169,7 @@ class GymView extends View {
     void saveWeight(){final EditText input=new EditText(activity);input.setInputType(2|8192);input.setHint("مثلاً ۷۵.۵");input.setText(String.valueOf(prefs.getFloat("weight",75f)));input.setSelectAllOnFocus(true);
         new AlertDialog.Builder(activity).setTitle("ثبت وزن").setMessage("وزن فعلی را به کیلو وارد کن").setView(input).setNegativeButton("لغو",null).setPositiveButton("ذخیره",(d,w)->{try{float v=Float.parseFloat(input.getText().toString().replace(',','.'));prefs.edit().putFloat("weight",v).apply();invalidate();}catch(Exception e){}}).show();}
     @Override public boolean onTouchEvent(MotionEvent e){
-        float y=e.getY()/density, x=e.getX()/density;
+        float y=e.getY()/(density*uiScale), x=e.getX()/(density*uiScale);
         if(e.getAction()==MotionEvent.ACTION_DOWN){downY=lastY=y;moved=false;return true;}
         if(e.getAction()==MotionEvent.ACTION_MOVE){float dy=lastY-y;if(Math.abs(y-downY)>8)moved=true;scroll+=dy;lastY=y;float max=detail>=0?520:(page==0?170:page==1?900:page==3?600:page==4?180:page==5?120:80);if(scroll<0)scroll=0;if(scroll>max)scroll=max;invalidate();return true;}
         if(e.getAction()==MotionEvent.ACTION_UP&&!moved){
