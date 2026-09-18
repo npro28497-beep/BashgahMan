@@ -117,7 +117,7 @@ class GymView extends View {
     void supplements(Canvas c){
         top(c,"راهنمای مکمل‌ها","کاربرد، شواهد و نکات احتیاطی");
         shadowCard(c,20,105,getWidth()-20,190,20);rtlB(c,"مکمل جای غذا نیست",getWidth()-38,138,17,ACCENT);rtl(c,"اول خواب، تغذیه و برنامه تمرینی را منظم کن.",getWidth()-38,166,11,MUTED);
-        float y=215;for(int i=0;i<supplement.length;i++){shadowCard(c,20,y,getWidth()-20,y+100,20);circle(c,getWidth()-48,y+31,i%2==0?ORANGE:CYAN,18);rtlB(c,supplement[i],getWidth()-78,y+34,16,WHITE);rtl(c,suppDesc[i],getWidth()-78,y+63,10,MUTED);y+=116;}
+        float y=215;for(int i=0;i<supplement.length;i++){shadowCard(c,20,y,getWidth()-20,y+100,20);circle(c,getWidth()-48,y+31,18,i%2==0?ORANGE:CYAN);rtlB(c,supplement[i],getWidth()-78,y+34,16,WHITE);rtl(c,suppDesc[i],getWidth()-78,y+63,10,MUTED);y+=116;}
     }
     void plans(Canvas c){
         top(c,"برنامه تمرینی","سه الگوی نمونه برای شروع و تنظیم فردی");
