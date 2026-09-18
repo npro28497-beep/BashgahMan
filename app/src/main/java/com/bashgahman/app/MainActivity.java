@@ -25,7 +25,7 @@ class GymView extends View {
             CYAN=Color.rgb(45,196,255), PURPLE=Color.rgb(151,105,255), WHITE=Color.rgb(246,249,251),
             MUTED=Color.rgb(145,164,176), GREEN=Color.rgb(67,210,143), RED=Color.rgb(255,92,92);
     Paint p=new Paint(Paint.ANTI_ALIAS_FLAG);
-    MainActivity activity; float density=1f; int page=0, detail=-1; float scroll=0, downY, lastY; boolean moved;
+    MainActivity activity; float density=1f; float W,H; int page=0, detail=-1; float scroll=0, downY, lastY; boolean moved;
     String[] nav={"خانه","تمرین","بدن","مکمل","برنامه","پیشرفت","درباره"};
     String[] navGlyph={"⌂","✦","◎","＋","▦","↗","i"};
     String[] exName={"پرس سینه هالتر","پرس بالا سینه دمبل","زیربغل قایقی","لت از جلو","پرس سرشانه دمبل","نشر جانب دمبل","جلو بازو دمبل","پشت بازو سیمکش","اسکوات هالتر","پرس پا دستگاه","ددلیفت رومانیایی","کرانچ شکم"};
