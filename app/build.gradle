@@ -1,0 +1,25 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'com.bashgahman.app'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.bashgahman.app'
+        minSdk 23
+        targetSdk 35
+        versionCode 1
+        versionName '1.0'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+}
+
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(17) }
+}
