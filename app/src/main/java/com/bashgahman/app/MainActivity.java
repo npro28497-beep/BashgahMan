@@ -48,46 +48,46 @@ class GymView extends View {
     void line(Canvas c,float x1,float y1,float x2,float y2,int color,float sw){p.setColor(color);p.setStrokeWidth(sw);p.setStyle(Paint.Style.STROKE);p.setStrokeCap(Paint.Cap.ROUND);c.drawLine(x1,y1,x2,y2,p);p.setStyle(Paint.Style.FILL);}
     @Override protected void onDraw(Canvas c){
         W=w(); H=h(); c.save(); c.scale(density,density);
-        fill(c,BG); c.save(); c.clipRect(0,0,getWidth(),getHeight()-92);
+        fill(c,BG); c.save(); c.clipRect(0,0,W,H-92);
         c.translate(0,-scroll);
         if(detail>=0) exerciseDetail(c); else switch(page){case 0:home(c);break;case 1:workouts(c);break;case 2:bodies(c);break;case 3:supplements(c);break;case 4:plans(c);break;case 5:progress(c);break;default:about(c);}
         c.restore(); bottom(c);
     }
     void top(Canvas c,String title,String sub){
-        rtlB(c,title,getWidth()-24,48+scroll,26,WHITE); rtl(c,sub,getWidth()-24,75+scroll,12,MUTED);
+        rtlB(c,title,W-24,48+scroll,26,WHITE); rtl(c,sub,W-24,75+scroll,12,MUTED);
         rr(c,22,24+scroll,58,60+scroll,18,Color.rgb(25,43,54));
         txt(c,"BM",40,49+scroll,12,ACCENT,Paint.Align.CENTER,true);
     }
     void home(Canvas c){
         top(c,"باشگاه من","راهنمای تمرین، تغذیه و پیشرفت");
         float y=105;
-        p.setShader(new LinearGradient(20,y,getWidth()-20,y+175,Color.rgb(25,49,63),Color.rgb(12,25,34),Shader.TileMode.CLAMP));
-        c.drawRoundRect(20,y,getWidth()-20,y+175,28,28,p);p.setShader(null);
-        rtlB(c,"هر روز، قوی‌تر از دیروز",getWidth()-42,y+54,25,WHITE);
-        rtl(c,"برنامه‌ات را بساز، تمرینت را ثبت کن",getWidth()-42,y+84,14,MUTED);
-        rr(c,getWidth()-188,y+110,getWidth()-42,y+151,20,ACCENT);
-        txt(c,"شروع تمرین",getWidth()-115,y+137,14,BG,Paint.Align.CENTER,true);
+        p.setShader(new LinearGradient(20,y,W-20,y+175,Color.rgb(25,49,63),Color.rgb(12,25,34),Shader.TileMode.CLAMP));
+        c.drawRoundRect(20,y,W-20,y+175,28,28,p);p.setShader(null);
+        rtlB(c,"هر روز، قوی‌تر از دیروز",W-42,y+54,25,WHITE);
+        rtl(c,"برنامه‌ات را بساز، تمرینت را ثبت کن",W-42,y+84,14,MUTED);
+        rr(c,W-188,y+110,W-42,y+151,20,ACCENT);
+        txt(c,"شروع تمرین",W-115,y+137,14,BG,Paint.Align.CENTER,true);
         circle(c,54,y+142,18,ORANGE); txt(c,"★",54,y+149,17,WHITE,Paint.Align.CENTER,true);
-        rtlB(c,"نمای کلی امروز",getWidth()-24,315,21,WHITE);
-        stat(c,20,335,(getWidth()-35)/2,425,"۰","تمرین ثبت‌شده",CYAN);
-        stat(c,(getWidth()+5)/2,335,getWidth()-20,425,"۷۵","کیلو وزن",ACCENT);
-        rtlB(c,"دسترسی سریع",getWidth()-24,465,21,WHITE);
-        quick(c,20,485,(getWidth()-35)/2,585,"تمرین‌ها","بانک حرکات",ACCENT,"01");
-        quick(c,(getWidth()+5)/2,485,getWidth()-20,585,"برنامه‌ها","برنامه هفتگی",ORANGE,"02");
-        quick(c,20,600,(getWidth()-35)/2,700,"مکمل‌ها","راهنمای کاربرد",CYAN,"03");
-        quick(c,(getWidth()+5)/2,600,getWidth()-20,700,"پیشرفت","ثبت تغییرات",PURPLE,"04");
-        rtlB(c,"یادآوری",getWidth()-24,750,20,WHITE);
-        shadowCard(c,20,770,getWidth()-20,850,22);rtlB(c,"فرم صحیح، اولویت اول",getWidth()-40,805,16,ACCENT);rtl(c,"وزنه کمتر با اجرای درست، بهتر از وزنه بیشتر با فرم بد است.",getWidth()-40,832,11,MUTED);
+        rtlB(c,"نمای کلی امروز",W-24,315,21,WHITE);
+        stat(c,20,335,(W-35)/2,425,"۰","تمرین ثبت‌شده",CYAN);
+        stat(c,(W+5)/2,335,W-20,425,"۷۵","کیلو وزن",ACCENT);
+        rtlB(c,"دسترسی سریع",W-24,465,21,WHITE);
+        quick(c,20,485,(W-35)/2,585,"تمرین‌ها","بانک حرکات",ACCENT,"01");
+        quick(c,(W+5)/2,485,W-20,585,"برنامه‌ها","برنامه هفتگی",ORANGE,"02");
+        quick(c,20,600,(W-35)/2,700,"مکمل‌ها","راهنمای کاربرد",CYAN,"03");
+        quick(c,(W+5)/2,600,W-20,700,"پیشرفت","ثبت تغییرات",PURPLE,"04");
+        rtlB(c,"یادآوری",W-24,750,20,WHITE);
+        shadowCard(c,20,770,W-20,850,22);rtlB(c,"فرم صحیح، اولویت اول",W-40,805,16,ACCENT);rtl(c,"وزنه کمتر با اجرای درست، بهتر از وزنه بیشتر با فرم بد است.",W-40,832,11,MUTED);
     }
     void stat(Canvas c,float l,float t,float r,float b,String n,String label,int ac){shadowCard(c,l,t,r,b,20);circle(c,l+30,t+31,15,ac);rtlB(c,n,r-18,t+39,26,WHITE);rtl(c,label,r-18,t+64,11,MUTED);}
     void quick(Canvas c,float l,float t,float r,float b,String a,String d,int ac,String n){shadowCard(c,l,t,r,b,20);rr(c,l+14,t+15,l+55,t+56,14,Color.rgb(27,43,54));txt(c,n,l+34,t+42,11,ac,Paint.Align.CENTER,true);rtlB(c,a,r-15,t+40,15,WHITE);rtl(c,d,r-15,t+64,10,MUTED);}
     void workouts(Canvas c){
         top(c,"کتابخانه تمرین","۱۲ حرکت کاربردی با راهنمای فرم");
-        rtl(c,"انتخاب عضله",getWidth()-24,120,13,MUTED);
-        String[] cats={"همه","سینه","پشت","سرشانه","بازو","پا","شکم"};float x=getWidth()-24;
+        rtl(c,"انتخاب عضله",W-24,120,13,MUTED);
+        String[] cats={"همه","سینه","پشت","سرشانه","بازو","پا","شکم"};float x=W-24;
         for(int i=0;i<cats.length;i++){float w=72;rr(c,x-w,138,x,177,19,i==0?ACCENT:CARD2);txt(c,cats[i],x-w/2,163,11,i==0?BG:WHITE,Paint.Align.CENTER,true);x-=w+8;}
         float y=205;
-        for(int i=0;i<exName.length;i++){exerciseCard(c,i,20,y,getWidth()-20);y+=112;}
+        for(int i=0;i<exName.length;i++){exerciseCard(c,i,20,y,W-20);y+=112;}
     }
     void exerciseCard(Canvas c,int i,float l,float t,float r){
         shadowCard(c,l,t,r,t+96,22);
@@ -98,70 +98,70 @@ class GymView extends View {
     }
     void exerciseDetail(Canvas c){
         top(c,"آموزش حرکت","راهنمای اجرای صحیح و نکات");
-        int i=detail; shadowCard(c,20,105,getWidth()-20,255,28);
+        int i=detail; shadowCard(c,20,105,W-20,255,28);
         rr(c,38,123,112,197,20,Color.rgb(27,47,60));txt(c,String.format("%02d",i+1),75,169,24,ACCENT,Paint.Align.CENTER,true);
-        rtlB(c,exName[i],getWidth()-38,148,23,WHITE);rtl(c,exMuscle[i],getWidth()-38,178,13,ACCENT);rtl(c,exSets[i],getWidth()-38,207,12,MUTED);
+        rtlB(c,exName[i],W-38,148,23,WHITE);rtl(c,exMuscle[i],W-38,178,13,ACCENT);rtl(c,exSets[i],W-38,207,12,MUTED);
         section(c,"روش اجرا",285,exTip[i]);
         section(c,"نکات کلیدی",390,"حرکت را با دامنه‌ای انجام بده که بدون درد و با کنترل کامل قابل اجرا باشد. تنفس را منظم نگه دار و از تاب دادن بدن برای جبران تکرارها خودداری کن.");
-        rr(c,20,535,getWidth()-20,590,18,ACCENT);txt(c,"افزودن به برنامه",getWidth()/2,570,15,BG,Paint.Align.CENTER,true);
-        rtlB(c,"پیشنهاد شروع",getWidth()-24,635,19,WHITE);
-        shadowCard(c,20,655,getWidth()-20,750,20);rtlB(c,"استراحت بین ست‌ها",getWidth()-40,690,14,WHITE);rtl(c,"۶۰ تا ۱۲۰ ثانیه • با توجه به شدت تمرین",getWidth()-40,718,11,MUTED);
+        rr(c,20,535,W-20,590,18,ACCENT);txt(c,"افزودن به برنامه",W/2,570,15,BG,Paint.Align.CENTER,true);
+        rtlB(c,"پیشنهاد شروع",W-24,635,19,WHITE);
+        shadowCard(c,20,655,W-20,750,20);rtlB(c,"استراحت بین ست‌ها",W-40,690,14,WHITE);rtl(c,"۶۰ تا ۱۲۰ ثانیه • با توجه به شدت تمرین",W-40,718,11,MUTED);
     }
-    void section(Canvas c,String h,float y,String d){rtlB(c,h,getWidth()-24,y,19,WHITE);shadowCard(c,20,y+18,getWidth()-20,y+104,20);rtl(c,d,getWidth()-38,y+48,12,WHITE);rtl(c,"• اجرای کنترل‌شده  • دامنه مناسب  • بدون درد",getWidth()-38,y+78,10,MUTED);}
+    void section(Canvas c,String h,float y,String d){rtlB(c,h,W-24,y,19,WHITE);shadowCard(c,20,y+18,W-20,y+104,20);rtl(c,d,W-38,y+48,12,WHITE);rtl(c,"• اجرای کنترل‌شده  • دامنه مناسب  • بدون درد",W-38,y+78,10,MUTED);}
     void bodies(Canvas c){
         top(c,"شناخت تیپ بدنی","برای آشنایی؛ نه تشخیص یا برچسب قطعی");
-        info(c,20,110,getWidth()-20,230,"اکتومورف","ساختار معمولاً باریک‌تر و افزایش وزن برای برخی افراد دشوارتر است.","تغذیه کافی + تمرین مقاومتی",CYAN);
-        info(c,20,250,getWidth()-20,370,"مزومورف","ساختار عضلانی‌تر در بسیاری از افراد؛ پاسخ بدن به تمرین و تغذیه فردی است.","پیشرفت تدریجی + برنامه منظم",ACCENT);
-        info(c,20,390,getWidth()-20,510,"اندومورف","در برخی افراد ذخیره چربی آسان‌تر است؛ این دسته‌بندی قطعی یا پزشکی نیست.","کسری کالری در صورت نیاز + تمرین",ORANGE);
-        shadowCard(c,20,545,getWidth()-20,650,22);rtlB(c,"نکته مهم",getWidth()-40,580,17,ACCENT);rtl(c,"تیپ‌های بدنی ابزار آموزشی ساده‌اند و ژنتیک،",getWidth()-40,612,12,WHITE);rtl(c,"ترکیب بدن و سبک زندگی را به‌طور کامل توضیح نمی‌دهند.",getWidth()-40,636,12,WHITE);
+        info(c,20,110,W-20,230,"اکتومورف","ساختار معمولاً باریک‌تر و افزایش وزن برای برخی افراد دشوارتر است.","تغذیه کافی + تمرین مقاومتی",CYAN);
+        info(c,20,250,W-20,370,"مزومورف","ساختار عضلانی‌تر در بسیاری از افراد؛ پاسخ بدن به تمرین و تغذیه فردی است.","پیشرفت تدریجی + برنامه منظم",ACCENT);
+        info(c,20,390,W-20,510,"اندومورف","در برخی افراد ذخیره چربی آسان‌تر است؛ این دسته‌بندی قطعی یا پزشکی نیست.","کسری کالری در صورت نیاز + تمرین",ORANGE);
+        shadowCard(c,20,545,W-20,650,22);rtlB(c,"نکته مهم",W-40,580,17,ACCENT);rtl(c,"تیپ‌های بدنی ابزار آموزشی ساده‌اند و ژنتیک،",W-40,612,12,WHITE);rtl(c,"ترکیب بدن و سبک زندگی را به‌طور کامل توضیح نمی‌دهند.",W-40,636,12,WHITE);
     }
     void info(Canvas c,float l,float t,float r,float b,String h,String d,String tip,int ac){shadowCard(c,l,t,r,b,22);circle(c,l+32,t+32,12,ac);rtlB(c,h,r-22,t+39,19,WHITE);rtl(c,d,r-22,t+72,11,MUTED);rtl(c,"تمرکز: "+tip,r-22,t+103,10,ac);}
     void supplements(Canvas c){
         top(c,"راهنمای مکمل‌ها","کاربرد، شواهد و نکات احتیاطی");
-        shadowCard(c,20,105,getWidth()-20,190,20);rtlB(c,"مکمل جای غذا نیست",getWidth()-38,138,17,ACCENT);rtl(c,"اول خواب، تغذیه و برنامه تمرینی را منظم کن.",getWidth()-38,166,11,MUTED);
-        float y=215;for(int i=0;i<supplement.length;i++){shadowCard(c,20,y,getWidth()-20,y+100,20);circle(c,getWidth()-48,y+31,18,i%2==0?ORANGE:CYAN);rtlB(c,supplement[i],getWidth()-78,y+34,16,WHITE);rtl(c,suppDesc[i],getWidth()-78,y+63,10,MUTED);y+=116;}
+        shadowCard(c,20,105,W-20,190,20);rtlB(c,"مکمل جای غذا نیست",W-38,138,17,ACCENT);rtl(c,"اول خواب، تغذیه و برنامه تمرینی را منظم کن.",W-38,166,11,MUTED);
+        float y=215;for(int i=0;i<supplement.length;i++){shadowCard(c,20,y,W-20,y+100,20);circle(c,W-48,y+31,18,i%2==0?ORANGE:CYAN);rtlB(c,supplement[i],W-78,y+34,16,WHITE);rtl(c,suppDesc[i],W-78,y+63,10,MUTED);y+=116;}
     }
     void plans(Canvas c){
         top(c,"برنامه تمرینی","سه الگوی نمونه برای شروع و تنظیم فردی");
-        plan(c,20,110,getWidth()-20,240,"شروع قدرت","۳ روز در هفته","تمام بدن","مناسب آشنایی با حرکات و ساخت عادت",ACCENT);
-        plan(c,20,260,getWidth()-20,390,"عضله‌سازی","۴ روز در هفته","بالاتنه / پایین‌تنه","حجم تمرین متوسط با روزهای استراحت",ORANGE);
-        plan(c,20,410,getWidth()-20,540,"ترکیبی","۵ روز در هفته","تقسیم عضلات","برای افراد باتجربه‌تر با تنظیم حجم و شدت",CYAN);
-        rr(c,20,575,getWidth()-20,635,20,ACCENT);txt(c,"ساخت برنامه شخصی",getWidth()/2,613,15,BG,Paint.Align.CENTER,true);
-        rtl(c,"برنامه نمونه جای نسخه اختصاصی مربی یا پزشک نیست.",getWidth()-24,680,11,MUTED);
+        plan(c,20,110,W-20,240,"شروع قدرت","۳ روز در هفته","تمام بدن","مناسب آشنایی با حرکات و ساخت عادت",ACCENT);
+        plan(c,20,260,W-20,390,"عضله‌سازی","۴ روز در هفته","بالاتنه / پایین‌تنه","حجم تمرین متوسط با روزهای استراحت",ORANGE);
+        plan(c,20,410,W-20,540,"ترکیبی","۵ روز در هفته","تقسیم عضلات","برای افراد باتجربه‌تر با تنظیم حجم و شدت",CYAN);
+        rr(c,20,575,W-20,635,20,ACCENT);txt(c,"ساخت برنامه شخصی",W/2,613,15,BG,Paint.Align.CENTER,true);
+        rtl(c,"برنامه نمونه جای نسخه اختصاصی مربی یا پزشک نیست.",W-24,680,11,MUTED);
     }
     void plan(Canvas c,float l,float t,float r,float b,String h,String days,String type,String d,int ac){shadowCard(c,l,t,r,b,23);rtlB(c,h,r-22,t+34,20,WHITE);rtl(c,days+"  •  "+type,r-22,t+62,11,ac);rtl(c,d,r-22,t+91,11,MUTED);rr(c,l+18,t+24,l+26,t+70,4,ac);}
     void progress(Canvas c){
         top(c,"پیشرفت من","ثبت وزن و پیگیری منظم");
         float weight=prefs.getFloat("weight",75f);
-        shadowCard(c,20,105,getWidth()-20,285,24);
-        rtl(c,"وزن فعلی",getWidth()-42,145,13,MUTED);rtlB(c,String.format(Locale.US,"%.1f کیلو",weight),getWidth()-42,190,32,WHITE);
-        rr(c,42,222,getWidth()-84,260,19,CARD2);float pct=Math.min(1,Math.max(0,(weight-50)/50f));rr(c,42,222,42+(getWidth()-84)*pct,260,19,ACCENT);
-        rr(c,20,310,getWidth()-20,366,18,ACCENT);txt(c,"ثبت وزن امروز",getWidth()/2,346,15,BG,Paint.Align.CENTER,true);
-        rtlB(c,"شاخص‌های پیگیری",getWidth()-24,415,20,WHITE);
-        metric(c,20,440,(getWidth()-35)/2,530,"تمرین","۰","جلسه");
-        metric(c,(getWidth()+5)/2,440,getWidth()-20,530,"هدف هفتگی","۳","جلسه");
-        rtlB(c,"نمودار پیشرفت",getWidth()-24,580,20,WHITE);
-        shadowCard(c,20,600,getWidth()-20,760,22);
-        for(int i=0;i<6;i++){float xx=48+i*(getWidth()-96)/5;line(c,xx,720,xx,625,CARD2,2);}
-        float[] yy={700,682,690,655,670,640};for(int i=0;i<5;i++)line(c,48+i*(getWidth()-96)/5,yy[i],48+(i+1)*(getWidth()-96)/5,yy[i+1],ACCENT,4);
-        rtl(c,"این نمودار نمونه است؛ ثبت واقعی از وزن‌های واردشده ساخته می‌شود.",getWidth()-30,795,10,MUTED);
+        shadowCard(c,20,105,W-20,285,24);
+        rtl(c,"وزن فعلی",W-42,145,13,MUTED);rtlB(c,String.format(Locale.US,"%.1f کیلو",weight),W-42,190,32,WHITE);
+        rr(c,42,222,W-84,260,19,CARD2);float pct=Math.min(1,Math.max(0,(weight-50)/50f));rr(c,42,222,42+(W-84)*pct,260,19,ACCENT);
+        rr(c,20,310,W-20,366,18,ACCENT);txt(c,"ثبت وزن امروز",W/2,346,15,BG,Paint.Align.CENTER,true);
+        rtlB(c,"شاخص‌های پیگیری",W-24,415,20,WHITE);
+        metric(c,20,440,(W-35)/2,530,"تمرین","۰","جلسه");
+        metric(c,(W+5)/2,440,W-20,530,"هدف هفتگی","۳","جلسه");
+        rtlB(c,"نمودار پیشرفت",W-24,580,20,WHITE);
+        shadowCard(c,20,600,W-20,760,22);
+        for(int i=0;i<6;i++){float xx=48+i*(W-96)/5;line(c,xx,720,xx,625,CARD2,2);}
+        float[] yy={700,682,690,655,670,640};for(int i=0;i<5;i++)line(c,48+i*(W-96)/5,yy[i],48+(i+1)*(W-96)/5,yy[i+1],ACCENT,4);
+        rtl(c,"این نمودار نمونه است؛ ثبت واقعی از وزن‌های واردشده ساخته می‌شود.",W-30,795,10,MUTED);
     }
     void metric(Canvas c,float l,float t,float r,float b,String h,String n,String u){shadowCard(c,l,t,r,b,20);rtl(c,h,r-15,t+28,11,MUTED);rtlB(c,n+" "+u,r-15,t+62,22,WHITE);}
     void about(Canvas c){
         top(c,"درباره باشگاه من","نسخه فارسی آموزش بدنسازی");
-        shadowCard(c,20,110,getWidth()-20,330,26);
-        rr(c,getWidth()/2-48,140,getWidth()/2+48,236,30,Color.rgb(24,43,55));txt(c,"BM",getWidth()/2,201,30,ACCENT,Paint.Align.CENTER,true);
-        rtlB(c,"باشگاه من",getWidth()/2+70,274,24,WHITE);rtl(c,"آموزش ساده برای تمرین بهتر",getWidth()/2+70,302,12,MUTED);
-        rtl(c,"مطالب آموزشی جایگزین پزشک، مربی یا متخصص تغذیه نیستند.",getWidth()-40,370,10,MUTED);
-        shadowCard(c,20,355,getWidth()-20,480,22);rtlB(c,"سازنده",getWidth()-40,390,16,ACCENT);rtlB(c,"@apkmod",getWidth()-40,430,23,WHITE);rtl(c,"برای پیشنهاد و پشتیبانی",getWidth()-40,456,11,MUTED);
-        rtlB(c,"امکانات نسخه",getWidth()-24,530,20,WHITE);
-        String[] a={"کتابخانه حرکات","تیپ‌های بدنی","راهنمای مکمل‌ها","برنامه تمرینی","ثبت پیشرفت"};for(int i=0;i<a.length;i++){rtl(c,"✓  "+a[i],getWidth()-42,570+i*36,13,WHITE);}
+        shadowCard(c,20,110,W-20,330,26);
+        rr(c,W/2-48,140,W/2+48,236,30,Color.rgb(24,43,55));txt(c,"BM",W/2,201,30,ACCENT,Paint.Align.CENTER,true);
+        rtlB(c,"باشگاه من",W/2+70,274,24,WHITE);rtl(c,"آموزش ساده برای تمرین بهتر",W/2+70,302,12,MUTED);
+        rtl(c,"مطالب آموزشی جایگزین پزشک، مربی یا متخصص تغذیه نیستند.",W-40,370,10,MUTED);
+        shadowCard(c,20,355,W-20,480,22);rtlB(c,"سازنده",W-40,390,16,ACCENT);rtlB(c,"@apkmod",W-40,430,23,WHITE);rtl(c,"برای پیشنهاد و پشتیبانی",W-40,456,11,MUTED);
+        rtlB(c,"امکانات نسخه",W-24,530,20,WHITE);
+        String[] a={"کتابخانه حرکات","تیپ‌های بدنی","راهنمای مکمل‌ها","برنامه تمرینی","ثبت پیشرفت"};for(int i=0;i<a.length;i++){rtl(c,"✓  "+a[i],W-42,570+i*36,13,WHITE);}
     }
     void circle(Canvas c,float x,float y,float rad,int color){p.setStyle(Paint.Style.FILL);p.setColor(color);c.drawCircle(x,y,rad,p);}
     void circle(Canvas c,float x,float y,int rad,int color,int dummy){circle(c,x,y,(float)rad,color);}
     void bottom(Canvas c){
-        float y=h()-92;rr(c,0,y,getWidth(),getHeight(),0,Color.rgb(8,17,24));
-        float w=getWidth()/7f;for(int i=0;i<7;i++){int col=i==page&&detail<0?ACCENT:MUTED;float cx=i*w+w/2;
+        float y=h()-92;rr(c,0,y,W,H,0,Color.rgb(8,17,24));
+        float w=W/7f;for(int i=0;i<7;i++){int col=i==page&&detail<0?ACCENT:MUTED;float cx=i*w+w/2;
             if(i==page&&detail<0)rr(c,cx-25,y+7,cx+25,y+39,16,Color.rgb(36,47,50));
             txt(c,navGlyph[i],cx,y+29,19,col,Paint.Align.CENTER,true);txt(c,nav[i],cx,y+61,9,col,Paint.Align.CENTER,true);
         }
@@ -173,7 +173,7 @@ class GymView extends View {
         if(e.getAction()==MotionEvent.ACTION_DOWN){downY=lastY=y;moved=false;return true;}
         if(e.getAction()==MotionEvent.ACTION_MOVE){float dy=lastY-y;if(Math.abs(y-downY)>8)moved=true;scroll+=dy;lastY=y;float max=detail>=0?520:(page==0?170:page==1?900:page==3?600:page==4?180:page==5?120:80);if(scroll<0)scroll=0;if(scroll>max)scroll=max;invalidate();return true;}
         if(e.getAction()==MotionEvent.ACTION_UP&&!moved){
-            if(y>getHeight()-100){int np=(int)(x/(getWidth()/7f));if(np>=0&&np<7){page=np;detail=-1;scroll=0;invalidate();}return true;}
+            if(y>H-100){int np=(int)(x/(W/7f));if(np>=0&&np<7){page=np;detail=-1;scroll=0;invalidate();}return true;}
             float sy=y+scroll;
             if(detail>=0){if(sy<90&&x<90){detail=-1;scroll=0;invalidate();}return true;}
             if(page==1&&sy>200){int idx=(int)((sy-205)/112);if(idx>=0&&idx<exName.length){detail=idx;scroll=0;invalidate();}}
